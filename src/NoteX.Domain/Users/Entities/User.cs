@@ -13,6 +13,10 @@ public class User
 
     public User(Name name, Email email, Password password)
     {
+        Name.Validate(name);
+        Email.Validate(email);
+        Password.Validate(password);
+
         Id = Ulid.NewUlid();
         Name = name;
         Email = email;

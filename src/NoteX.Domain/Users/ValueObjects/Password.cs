@@ -48,4 +48,12 @@ public record Password
     {
         return Hasher.VerifyHashedPassword(null, HashedValue, password) != PasswordVerificationResult.Failed;
     }
+
+    public static void Validate(Password password)
+    {
+        if (password == null)
+        {
+            throw new PasswordNullException();
+        }
+    }
 }
