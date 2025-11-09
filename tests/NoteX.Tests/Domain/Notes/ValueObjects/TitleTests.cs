@@ -29,13 +29,13 @@ public class TitleTests
     public void GivenShortTitle_WhenCreatingTitle_ThenThrowsTitleOutRangeException()
     {
         string tooShort = new('A', 4);
-        Assert.Throws<TitleOutRangeException>(() => Title.Create(tooShort));
+        Assert.Throws<TitleOutOfRangeException>(() => Title.Create(tooShort));
     }
 
     [Fact]
     public void GivenLongTitle_WhenCreatingTitle_ThenThrowsTitleOutRangeException()
     {
         string tooLong = new('A', 101);
-        Assert.Throws<TitleOutRangeException>(() => Title.Create(tooLong));
+        Assert.Throws<TitleOutOfRangeException>(() => Title.Create(tooLong));
     }
 }
