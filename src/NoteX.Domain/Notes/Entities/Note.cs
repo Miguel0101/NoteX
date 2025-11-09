@@ -6,8 +6,8 @@ public class Note
 {
     public Ulid Id { get; private set; }
     public Ulid UserId { get; private set; }
-    public Title Title { get; private set; } = null!;
-    public Content Content { get; private set; } = null!;
+    public Title Title { get; private set; }
+    public Content Content { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime? UpdatedAt { get; private set; }
 
