@@ -28,7 +28,7 @@ public record Title
 
         if (title.Length < MinLength || title.Length > MaxLength)
         {
-            throw new TitleOutRangeException(MinLength, MaxLength);
+            throw new TitleOutOfRangeException(MinLength, MaxLength);
         }
 
         return new Title(title);
