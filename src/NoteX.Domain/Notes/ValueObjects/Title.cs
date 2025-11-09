@@ -1,3 +1,5 @@
+using NoteX.Domain.Notes.Exceptions;
+
 namespace NoteX.Domain.Notes.ValueObjects;
 
 public record Title
@@ -12,5 +14,31 @@ public record Title
         Value = title;
     }
 
-    public static Title Create() { }
+    public static Title Create(string title)
+    {
+        if (title == null)
+        {
+            throw new TitleNullException();
+        }
+
+        if (string.IsNullOrWhiteSpace(title))
+        {
+            throw new TitleEmptyException();
+        }
+
+        if (title.Length < MinLength || title.Length > MaxLength)
+        {
+            throw new TitleOutRangeException(MinLength, MaxLength);
+        }
+
+        return new Title(title);
+    }
+
+    public static void Validate(Title title)
+    {
+        if (title == null)
+        {
+            throw new TitleNullException();
+        }
+    }
 }
