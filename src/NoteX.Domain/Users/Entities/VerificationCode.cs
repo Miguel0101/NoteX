@@ -5,16 +5,18 @@ namespace NoteX.Domain.Users.Entities;
 
 public class VerificationCode
 {
-    public Ulid Id { get; private set; }
-    public Ulid UserId { get; private set; }
+    public Guid Id { get; private set; }
+    public Guid UserId { get; private set; }
     public Code Code { get; private set; }
     public DateTime? VerifiedAt { get; private set; }
     public DateTime ExpiredAt { get; private set; }
     public DateTime CreatedAt { get; private set; }
 
-    internal VerificationCode(Ulid userId)
+    public User User { get; } = null!;
+
+    internal VerificationCode(Guid userId)
     {
-        Id = Ulid.NewUlid();
+        Id = Guid.NewGuid();
         UserId = userId;
         Code = Code.Create();
         VerifiedAt = null;

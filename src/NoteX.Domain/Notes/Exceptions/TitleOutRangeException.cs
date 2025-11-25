@@ -1,3 +1,7 @@
 namespace NoteX.Domain.Notes.Exceptions;
 
-public class TitleOutOfRangeException(int MinLength, int MaxLength) : Exception($"The title must be between {MinLength} and {MaxLength} characters.");
+public class TitleOutOfRangeException(int minLength, int maxLength) : Exception($"The title must be between {minLength} and {maxLength} characters.")
+{
+    public int MinLength { get; } = minLength;
+    public int MaxLength { get; } = maxLength;
+}

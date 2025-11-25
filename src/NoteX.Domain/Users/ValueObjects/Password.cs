@@ -17,7 +17,7 @@ public record Password
         HashedValue = hashPassword;
     }
 
-    public static Password Create(string password)
+    public static Password Create(string? password)
     {
         if (password == null)
         {
@@ -44,16 +44,8 @@ public record Password
         return new Password(hashedValue);
     }
 
-    public bool Verify(string password)
+    public bool Verify(string? password)
     {
         return Hasher.VerifyHashedPassword(null, HashedValue, password) != PasswordVerificationResult.Failed;
-    }
-
-    public static void Validate(Password password)
-    {
-        if (password == null)
-        {
-            throw new PasswordNullException();
-        }
     }
 }

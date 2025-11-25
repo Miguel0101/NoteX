@@ -1,13 +1,16 @@
+using NoteX.Domain.Common.Entities;
+using NoteX.Domain.Notes.Entities;
+using NoteX.Domain.Users.Events;
 using NoteX.Domain.Users.Exceptions;
 using NoteX.Domain.Users.ValueObjects;
 
 namespace NoteX.Domain.Users.Entities;
 
-public class User
+public class User : AggregateRoot
 {
     private readonly List<VerificationCode> _verificationCodes = [];
 
-    public Ulid Id { get; private set; }
+    public Guid Id { get; private set; }
     public Name Name { get; private set; }
     public Email Email { get; private set; }
     public Password Password { get; private set; }
@@ -15,14 +18,11 @@ public class User
     public DateTime CreatedAt { get; private set; }
 
     public IReadOnlyCollection<VerificationCode> VerificationCodes => _verificationCodes.AsReadOnly();
+    public ICollection<Note> Notes { get; } = [];
 
-    public User(Name name, Email email, Password password)
+    private User(Name name, Email email, Password password)
     {
-        Name.Validate(name);
-        Email.Validate(email);
-        Password.Validate(password);
-
-        Id = Ulid.NewUlid();
+        Id = Guid.NewGuid();
         Name = name;
         Email = email;
         Password = password;
@@ -30,10 +30,21 @@ public class User
         UpdatedAt = null;
     }
 
+    public static User Register(Name name, Email email, Password password)
+    {
+        User user = new(name, email, password);
+
+        user.AddDomainEvent(new UserRegisteredDomainEvent(user.Id, name, email));
+
+        return user;
+    }
+
     public User UpdateName(Name name)
     {
         Name = name;
         UpdatedAt = DateTime.UtcNow;
+
+        AddDomainEvent(new UserNameUpdatedDomainEvent(Id, name));
 
         return this;
     }
@@ -42,6 +53,8 @@ public class User
     {
         Email = email;
         UpdatedAt = DateTime.UtcNow;
+
+        AddDomainEvent(new UserEmailUpdatedDomainEvent(Id, email));
 
         return this;
     }
@@ -56,6 +69,8 @@ public class User
         VerificationCode code = new(Id);
 
         _verificationCodes.Add(code);
+
+        AddDomainEvent(new UserVerificationCodeGeneratedDomainEvent(Id, Name, Email, code.Code));
 
         return code;
     }

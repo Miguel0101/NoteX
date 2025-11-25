@@ -4,7 +4,7 @@ namespace NoteX.Domain.Notes.ValueObjects;
 
 public record Content
 {
-    public const int MaxLenght = 3000;
+    public const int MaxLength = 3000;
     
     public string Value { get; } = string.Empty;
 
@@ -13,26 +13,18 @@ public record Content
         Value = content;
     }
 
-    public static Content Create(string content)
+    public static Content Create(string? content)
     {
         if (content == null)
         {
             throw new ContentNullException();
         }
 
-        if (content.Length > MaxLenght)
+        if (content.Length > MaxLength)
         {
-            throw new ContentOutOfRangeException(MaxLenght);
+            throw new ContentOutOfRangeException(MaxLength);
         }
 
         return new Content(content);
-    }
-
-    public static void Validate(Content content)
-    {
-        if (content == null)
-        {
-            throw new ContentNullException();
-        }
     }
 }

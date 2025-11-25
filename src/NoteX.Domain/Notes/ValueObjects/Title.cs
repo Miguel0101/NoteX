@@ -14,7 +14,7 @@ public record Title
         Value = title;
     }
 
-    public static Title Create(string title)
+    public static Title Create(string? title)
     {
         if (title == null)
         {
@@ -32,13 +32,5 @@ public record Title
         }
 
         return new Title(title);
-    }
-
-    public static void Validate(Title title)
-    {
-        if (title == null)
-        {
-            throw new TitleNullException();
-        }
     }
 }

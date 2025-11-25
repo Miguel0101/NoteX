@@ -23,4 +23,9 @@ public record Code
 
         return new Code(code);
     }
+
+    public static Code FromCode(string code)
+    {
+        return new Code(code);
+    }
 }

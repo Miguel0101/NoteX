@@ -12,7 +12,7 @@ public record Email
         Value = email;
     }
 
-    public static Email Create(string email)
+    public static Email Create(string? email)
     {
         if (email == null)
         {
@@ -33,14 +33,6 @@ public record Email
         catch
         {
             throw new EmailFormatException();
-        }
-    }
-
-    public static void Validate(Email email)
-    {
-        if (email == null)
-        {
-            throw new EmailNullException();
         }
     }
 }
