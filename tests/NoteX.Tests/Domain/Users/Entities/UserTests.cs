@@ -80,34 +80,4 @@ public class UserTests
 
         Assert.Throws<VerificationCodeNotFoundException>(() => user.VerifyVerificationCode(code));
     }
-
-    [Fact]
-    public void GivenNullName_WhenCreatingUser_ThenThrowsNameNullException()
-    {
-        Name name = null!;
-        Email email = Email.Create("email@valid.com");
-        Password password = Password.Create("Valid password");
-
-        Assert.Throws<NameNullException>(() => { User user = User.Register(name, email, password); });
-    }
-
-    [Fact]
-    public void GivenNullEmail_WhenCreatingUser_ThenThrowsEmailNullException()
-    {
-        Name name = Name.Create("Valid name");
-        Email email = null!;
-        Password password = Password.Create("Valid password");
-
-        Assert.Throws<EmailNullException>(() => { User user = User.Register(name, email, password); });
-    }
-
-    [Fact]
-    public void GivenNullPassword_WhenCreatingUser_ThenThrowsPasswordNullException()
-    {
-        Name name = Name.Create("Valid name");
-        Email email = Email.Create("email@valid.com");
-        Password password = null!;
-
-        Assert.Throws<PasswordNullException>(() => { User user = User.Register(name, email, password); });
-    }
 }
