@@ -1,4 +1,8 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NoteX.API.Mappers;
+using NoteX.Application.Users.DTOs.Requests;
+using NoteX.Application.Users.Services;
 
 namespace NoteX.API.Controllers;
 
@@ -6,27 +10,43 @@ namespace NoteX.API.Controllers;
 [Route("api/auth")]
 public class AuthController : ControllerBase
 {
-    [HttpPost("login")]
-    public IActionResult Login()
+    private readonly IAuthService _authService;
+
+    public AuthController(IAuthService authService)
     {
-        return Ok();
+        _authService = authService;
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> RequestUserVerificationCode(LoginAccontRequest request)
+    {
+        var result = await _authService.LoginWithCredentialsAsync(request);
+
+        return result.ToActionResult();
+    }
+
+    [HttpPost("login/verify")]
+    public async Task<IActionResult> VerifyUserVerificationCode(SendAccountVerificationCodeRequest request)
+    {
+        var result = await _authService.VerifyAccountWithCodeAsync(request);
+
+        return result.ToActionResult();
     }
 
     [HttpPost("register")]
-    public IActionResult Register()
+    public async Task<IActionResult> Register(RegisterAccountRequest request)
     {
-        return Created();
-    }
+        var result = await _authService.RegisterAccountAsync(request);
 
-    [HttpPost("verify")]
-    public IActionResult Verify()
-    {
-        return Ok();
+        return result.ToActionResult();
     }
 
     [HttpGet("details")]
-    public IActionResult Details()
+    [Authorize]
+    public async Task<IActionResult> Details()
     {
-        return Ok();
+        var result = await _authService.GetAccountDetailsAsync();
+
+        return result.ToActionResult();
     }
 }
