@@ -1,0 +1,54 @@
+services:
+  db:
+    container_name: notex-db
+    image: postgres:alpine
+    environment:
+      - POSTGRES_DB=${DBMS_DATABASE}
+      - POSTGRES_USER=${DBMS_USER}
+      - POSTGRES_PASSWORD=${DBMS_PASSWORD}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - notex-network
+
+  api:
+    container_name: notex-api
+    image: notex/api:latest
+    build:
+      context: .
+      dockerfile: ./src/NoteX.API/Dockerfile
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__DbCredentials=Host=db;Database=${DBMS_DATABASE};Username=${DBMS_USER};Password=${DBMS_PASSWORD}
+      - JwtSettings__Issuer=${JWT_ISSUER}
+      - JwtSettings__Audience=${JWT_AUDIENCE}
+      - JwtSettings__PrivateKey=${JWT_PRIVATE_KEY}
+      - JwtSettings__Lifetime=${JWT_LIFETIME}
+    ports:
+      - "9876:9876"
+    networks:
+      - notex-network
+
+  migration:
+    container_name: notex-migration
+    image: notex/migration:latest
+    build:
+      context: .
+      dockerfile: ./src/NoteX.API/Dockerfile.Migration
+    profiles: [ "optional" ]
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__DbCredentials=Host=db;Database=${DBMS_DATABASE};Username=${DBMS_USER};Password=${DBMS_PASSWORD}
+    networks:
+      - notex-network
+
+volumes:
+  db_data:
+
+networks:
+  notex-network:
+    driver: bridge
