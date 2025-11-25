@@ -1,0 +1,13 @@
+FROM mcr.microsoft.com/dotnet/sdk:10.0-alpine
+
+WORKDIR /src
+
+COPY . .
+
+RUN dotnet restore
+
+RUN dotnet tool install --global dotnet-ef
+
+ENV PATH="$PATH:/root/.dotnet/tools"
+
+ENTRYPOINT [ "dotnet", "ef", "database", "update", "--startup-project", "src/NoteX.API", "--project", "src/NoteX.Infrastructure" ]

@@ -14,7 +14,7 @@ public record Name
         Value = name;
     }
 
-    public static Name Create(string name)
+    public static Name Create(string? name)
     {
         if (name == null)
         {
@@ -32,13 +32,5 @@ public record Name
         }
 
         return new Name(name);
-    }
-
-    public static void Validate(Name name)
-    {
-        if (name == null)
-        {
-            throw new NameNullException();
-        }
     }
 }

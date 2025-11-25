@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- General -->
+  <data name="Success" xml:space="preserve">
+    <value>Success.</value>
+  </data>
+
+  <data name="InternalError" xml:space="preserve">
+    <value>An unexpected server error has occurred.</value>
+  </data>
+
+  <!-- Auth -->
+  <data name="SignInSuccessfully" xml:space="preserve">
+    <value>User signed in successfully.</value>
+  </data>
+
+  <data name="SignUpSuccessfully" xml:space="preserve">
+    <value>User registered successfully.</value>
+  </data>
+
+  <data name="AccountVerificationCodeSent" xml:space="preserve">
+    <value>A verification code has been sent to your account.</value>
+  </data>
+
+  <data name="AccountNotFoundError" xml:space="preserve">
+    <value>No account was found with the specified credentials.</value>
+  </data>
+
+  <data name="AccountAlreadyExistsError" xml:space="preserve">
+    <value>An account with the specified information already exists.</value>
+  </data>
+
+  <data name="InvalidPasswordError" xml:space="preserve">
+    <value>The provided password is incorrect.</value>
+  </data>
+
+  <!-- Email -->
+  <data name="EmailNullError" xml:space="preserve">
+    <value>The email field cannot be null.</value>
+  </data>
+
+  <data name="EmailEmptyError" xml:space="preserve">
+    <value>The email field cannot be empty.</value>
+  </data>
+
+  <data name="EmailFormatError" xml:space="preserve">
+    <value>The provided email address is invalid.</value>
+  </data>
+
+  <!-- Name -->
+  <data name="NameNullError" xml:space="preserve">
+    <value>The name field cannot be null.</value>
+  </data>
+
+  <data name="NameEmptyError" xml:space="preserve">
+    <value>The name field cannot be empty.</value>
+  </data>
+
+  <data name="NameOutOfRangeError" xml:space="preserve">
+    <value>The name must be between {0} and {1} characters.</value>
+  </data>
+
+  <!-- Password -->
+  <data name="PasswordNullError" xml:space="preserve">
+    <value>The password field cannot be null.</value>
+  </data>
+
+  <data name="PasswordEmptyError" xml:space="preserve">
+    <value>The password field cannot be empty.</value>
+  </data>
+
+  <data name="PasswordOutOfRangeError" xml:space="preserve">
+    <value>The password must be between {0} and {1} characters.</value>
+  </data>
+
+  <!-- Verification Code -->
+  <data name="VerificationCodeNotFoundError" xml:space="preserve">
+    <value>No verification code was found for this account.</value>
+  </data>
+
+  <data name="VerificationCodeExpiredError" xml:space="preserve">
+    <value>The verification code has expired.</value>
+  </data>
+
+  <data name="VerificationCodePendingError" xml:space="preserve">
+    <value>There is already a pending verification code.</value>
+  </data>
+
+  <data name="VerificationCodeVerifiedError" xml:space="preserve">
+    <value>The verification code has already been verified.</value>
+  </data>
+
+  <!-- Note -->
+  <data name="NoteNotFoundError" xml:space="preserve">
+    <value>The requested note could not be found.</value>
+  </data>
+
+  <data name="NoteAlreadyExistsError" xml:space="preserve">
+    <value>A note with the specified title already exists.</value>
+  </data>
+
+  <!-- Title -->
+  <data name="TitleNullError" xml:space="preserve">
+    <value>The title field cannot be null.</value>
+  </data>
+
+  <data name="TitleEmptyError" xml:space="preserve">
+    <value>The title field cannot be empty.</value>
+  </data>
+
+  <data name="TitleOutOfRangeError" xml:space="preserve">
+    <value>The title must be between {0} and {1} characters.</value>
+  </data>
+
+  <!-- Content -->
+  <data name="ContentNullError" xml:space="preserve">
+    <value>The content field cannot be null.</value>
+  </data>
+
+  <data name="ContentOutOfRangeError" xml:space="preserve">
+    <value>The content must not exceed {0} characters.</value>
+  </data>
+
+</root>

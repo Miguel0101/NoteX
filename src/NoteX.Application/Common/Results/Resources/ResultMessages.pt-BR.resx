@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- General -->
+  <data name="Success" xml:space="preserve">
+    <value>Sucesso.</value>
+  </data>
+
+  <data name="InternalError" xml:space="preserve">
+    <value>Ocorreu um erro inesperado no servidor.</value>
+  </data>
+
+  <!-- Auth -->
+  <data name="SignInSuccessfully" xml:space="preserve">
+    <value>Usuário autenticado com sucesso.</value>
+  </data>
+
+  <data name="SignUpSuccessfully" xml:space="preserve">
+    <value>Usuário registrado com sucesso.</value>
+  </data>
+
+  <data name="AccountVerificationCodeSent" xml:space="preserve">
+    <value>Um código de verificação foi enviado para a sua conta.</value>
+  </data>
+
+  <data name="AccountNotFoundError" xml:space="preserve">
+    <value>A conta informada não foi encontrada.</value>
+  </data>
+
+  <data name="AccountAlreadyExistsError" xml:space="preserve">
+    <value>A conta informada já está registrada.</value>
+  </data>
+
+  <data name="InvalidPasswordError" xml:space="preserve">
+    <value>A senha informada está incorreta.</value>
+  </data>
+
+  <!-- Email -->
+  <data name="EmailNullError" xml:space="preserve">
+    <value>O campo de e-mail não pode ser nulo.</value>
+  </data>
+
+  <data name="EmailEmptyError" xml:space="preserve">
+    <value>O campo de e-mail não pode estar vazio.</value>
+  </data>
+
+  <data name="EmailFormatError" xml:space="preserve">
+    <value>O e-mail informado é inválido.</value>
+  </data>
+
+  <!-- Name -->
+  <data name="NameNullError" xml:space="preserve">
+    <value>O campo de nome não pode ser nulo.</value>
+  </data>
+
+  <data name="NameEmptyError" xml:space="preserve">
+    <value>O campo de nome não pode estar vazio.</value>
+  </data>
+
+  <data name="NameOutOfRangeError" xml:space="preserve">
+    <value>O nome deve conter entre {0} e {1} caracteres.</value>
+  </data>
+
+  <!-- Password -->
+  <data name="PasswordNullError" xml:space="preserve">
+    <value>O campo de senha não pode ser nulo.</value>
+  </data>
+
+  <data name="PasswordEmptyError" xml:space="preserve">
+    <value>O campo de senha não pode estar vazio.</value>
+  </data>
+
+  <data name="PasswordOutOfRangeError" xml:space="preserve">
+    <value>A senha deve conter entre {0} e {1} caracteres.</value>
+  </data>
+
+  <!-- Verification Code -->
+  <data name="VerificationCodeNotFoundError" xml:space="preserve">
+    <value>Nenhum código de verificação foi encontrado para esta conta.</value>
+  </data>
+
+  <data name="VerificationCodeExpiredError" xml:space="preserve">
+    <value>O código de verificação expirou.</value>
+  </data>
+
+  <data name="VerificationCodePendingError" xml:space="preserve">
+    <value>Já existe um código de verificação pendente.</value>
+  </data>
+
+  <data name="VerificationCodeVerifiedError" xml:space="preserve">
+    <value>O código de verificação já foi utilizado.</value>
+  </data>
+
+  <!-- Note -->
+  <data name="NoteNotFoundError" xml:space="preserve">
+    <value>A nota informada não foi encontrada.</value>
+  </data>
+
+  <data name="NoteAlreadyExistsError" xml:space="preserve">
+    <value>Já existe uma nota com o título informado.</value>
+  </data>
+
+  <!-- Title -->
+  <data name="TitleNullError" xml:space="preserve">
+    <value>O campo de título não pode ser nulo.</value>
+  </data>
+
+  <data name="TitleEmptyError" xml:space="preserve">
+    <value>O campo de título não pode estar vazio.</value>
+  </data>
+
+  <data name="TitleOutOfRangeError" xml:space="preserve">
+    <value>O título deve conter entre {0} e {1} caracteres.</value>
+  </data>
+
+  <!-- Content -->
+  <data name="ContentNullError" xml:space="preserve">
+    <value>O campo de conteúdo não pode ser nulo.</value>
+  </data>
+
+  <data name="ContentOutOfRangeError" xml:space="preserve">
+    <value>O conteúdo deve conter no máximo {0} caracteres.</value>
+  </data>
+
+</root>
