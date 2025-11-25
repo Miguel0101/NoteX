@@ -8,20 +8,23 @@ namespace NoteX.Tests.Infrastructure.Users.Repositories;
 
 public class UserRepositoryTests
 {
-    private static ApplicationDbContext GetInMemoryDbContext()
+    private static ApplicationDbContext GetSqliteInMemoryDbContext()
     {
         var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+            .UseSqlite("Filename=:memory:")
             .Options;
 
-        return new ApplicationDbContext(options);
+        var context = new ApplicationDbContext(options);
+        context.Database.OpenConnection();
+        context.Database.EnsureCreated();
+        return context;
     }
 
     [Fact]
     public async Task GivenUser_WhenAddingUserOnDatabase_ThenUserIsAddedSuccessfully()
     {
         // Arrange
-        using ApplicationDbContext context = GetInMemoryDbContext();
+        using ApplicationDbContext context = GetSqliteInMemoryDbContext();
         UserRepository repo = new(context);
         User user = User.Register(Name.Create("Valid Name"), Email.Create("email@valid.com"), Password.Create("Valid Password"));
 

@@ -27,18 +27,15 @@ public class NoteRepositoryTests
     public async Task GivenUserAndNote_WhenAddingNoteOnDatabase_ThenNoteIsAddedSuccessfully()
     {
         using var context = GetSqliteInMemoryDbContext();
-        var unitOfWork = new UnitOfWork(context);
         var userRepo = new UserRepository(context);
         var noteRepo = new NoteRepository(context);
 
         var user = User.Register(Name.Create("Valid Name"), Email.Create("email@valid.com"), Password.Create("Valid Password"));
         var note = Note.Create(user.Id, Title.Create("Valid Title"), Content.Create("Valid Content"));
 
-        await unitOfWork.BeginTransactionAsync();
         await userRepo.AddAsync(user);
         await noteRepo.AddAsync(note);
-        await unitOfWork.SaveChangesAsync();
-        await unitOfWork.CommitAsync();
+        await context.SaveChangesAsync();
 
         var savedNote = await noteRepo.GetByIdAsync(user.Id, note.Id);
 
@@ -52,7 +49,6 @@ public class NoteRepositoryTests
     public async Task GivenMultipleNotes_WhenFindByPredicateAndUserId_ThenOnlyUserNotesAreReturned()
     {
         using var context = GetSqliteInMemoryDbContext();
-        var unitOfWork = new UnitOfWork(context);
         var userRepo = new UserRepository(context);
         var noteRepo = new NoteRepository(context);
 
@@ -63,16 +59,13 @@ public class NoteRepositoryTests
         var note2 = Note.Create(user1.Id, Title.Create("Title2"), Content.Create("Content2"));
         var note3 = Note.Create(user2.Id, Title.Create("Title3"), Content.Create("Content3"));
 
-        await unitOfWork.BeginTransactionAsync();
-
         await userRepo.AddAsync(user1);
         await userRepo.AddAsync(user2);
         await noteRepo.AddAsync(note1);
         await noteRepo.AddAsync(note2);
         await noteRepo.AddAsync(note3);
 
-        await unitOfWork.SaveChangesAsync();
-        await unitOfWork.CommitAsync();
+        await context.SaveChangesAsync();
 
         var results = (await noteRepo.GetAllAsync(user1.Id))
             .Where(n => n.Title.Value.Contains("Title"));
