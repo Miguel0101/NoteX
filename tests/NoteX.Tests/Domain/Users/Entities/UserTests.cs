@@ -13,7 +13,7 @@ public class UserTests
         Email email = Email.Create("email@valid.com");
         Password password = Password.Create("Valid password");
 
-        User user = new(name, email, password);
+        User user = User.Register(name, email, password);
 
         Assert.Equal("Valid name", user.Name.Value);
         Assert.Equal("email@valid.com", user.Email.Value);
@@ -28,7 +28,7 @@ public class UserTests
         Email email = Email.Create("email@valid.com");
         Password password = Password.Create("Valid password");
 
-        User user = new(name, email, password);
+        User user = User.Register(name, email, password);
 
         VerificationCode code = user.GenerateVerificationCode();
 
@@ -44,7 +44,7 @@ public class UserTests
         Email email = Email.Create("email@valid.com");
         Password password = Password.Create("Valid password");
 
-        User user = new(name, email, password);
+        User user = User.Register(name, email, password);
 
         VerificationCode pendingCode = user.GenerateVerificationCode();
         VerificationCode verifiedCode = user.VerifyVerificationCode(pendingCode.Code);
@@ -60,7 +60,7 @@ public class UserTests
         Email email = Email.Create("email@valid.com");
         Password password = Password.Create("Valid password");
 
-        User user = new(name, email, password);
+        User user = User.Register(name, email, password);
 
         user.GenerateVerificationCode();
 
@@ -74,7 +74,7 @@ public class UserTests
         Email email = Email.Create("email@valid.com");
         Password password = Password.Create("Valid password");
 
-        User user = new(name, email, password);
+        User user = User.Register(name, email, password);
 
         Code code = Code.Create();
 
@@ -88,7 +88,7 @@ public class UserTests
         Email email = Email.Create("email@valid.com");
         Password password = Password.Create("Valid password");
 
-        Assert.Throws<NameNullException>(() => { User user = new(name, email, password); });
+        Assert.Throws<NameNullException>(() => { User user = User.Register(name, email, password); });
     }
 
     [Fact]
@@ -98,7 +98,7 @@ public class UserTests
         Email email = null!;
         Password password = Password.Create("Valid password");
 
-        Assert.Throws<EmailNullException>(() => { User user = new(name, email, password); });
+        Assert.Throws<EmailNullException>(() => { User user = User.Register(name, email, password); });
     }
 
     [Fact]
@@ -108,6 +108,6 @@ public class UserTests
         Email email = Email.Create("email@valid.com");
         Password password = null!;
 
-        Assert.Throws<PasswordNullException>(() => { User user = new(name, email, password); });
+        Assert.Throws<PasswordNullException>(() => { User user = User.Register(name, email, password); });
     }
 }
