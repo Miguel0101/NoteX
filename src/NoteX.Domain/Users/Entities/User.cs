@@ -6,6 +6,11 @@ using NoteX.Domain.Users.ValueObjects;
 
 namespace NoteX.Domain.Users.Entities;
 
+/// <summary>
+/// User - Domain Aggregate
+/// <para>Represents a user with name, email and password.</para>
+/// <para>A user can generate and verify an account verification code.</para>
+/// </summary>
 public class User : AggregateRoot
 {
     private readonly List<VerificationCode> _verificationCodes = [];
@@ -30,6 +35,13 @@ public class User : AggregateRoot
         UpdatedAt = null;
     }
 
+    /// <summary>
+    /// Register a user with name, email and password.
+    /// </summary>
+    /// <param name="name">The name</param>
+    /// <param name="email">The email</param>
+    /// <param name="password">The password</param>
+    /// <returns>The registered user.</returns>
     public static User Register(Name name, Email email, Password password)
     {
         User user = new(name, email, password);
@@ -39,6 +51,11 @@ public class User : AggregateRoot
         return user;
     }
 
+    /// <summary>
+    /// Updates the name of a existing user.
+    /// </summary>
+    /// <param name="name">The updated name</param>
+    /// <returns>The updated user.</returns>
     public User UpdateName(Name name)
     {
         Name = name;
@@ -49,6 +66,11 @@ public class User : AggregateRoot
         return this;
     }
 
+    /// <summary>
+    /// Updates the email of a existing user.
+    /// </summary>
+    /// <param name="email">The updated email</param>
+    /// <returns>The updated user.</returns>
     public User UpdateEmail(Email email)
     {
         Email = email;
@@ -59,6 +81,13 @@ public class User : AggregateRoot
         return this;
     }
 
+    /// <summary>
+    /// Generates an account verification code.
+    /// </summary>
+    /// <returns>The generated verification code.</returns>
+    /// <exception cref="VerificationCodePendingException">
+    /// Thrown when there is already a pending verification code.
+    /// </exception>
     public VerificationCode GenerateVerificationCode()
     {
         if (_verificationCodes.Any(v => v.IsPending()))
@@ -75,6 +104,14 @@ public class User : AggregateRoot
         return code;
     }
 
+    /// <summary>
+    /// Checks an account verification code.
+    /// </summary>
+    /// <param name="code">The code to be verified</param>
+    /// <returns></returns>
+    /// <exception cref="VerificationCodeNotFoundException">
+    /// Thrown when the code cannot be found.
+    /// </exception>
     public VerificationCode VerifyVerificationCode(Code code)
     {
         VerificationCode verificationCode = _verificationCodes
